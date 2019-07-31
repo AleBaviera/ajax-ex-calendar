@@ -45,7 +45,7 @@ $(document).ready(function(){
       for (var i = 0; i < holidays.length; i++) {
       $('li').each(function(){
 
-        
+
 
         var data = $(this).html();
         // console.log(holidays[i]);
@@ -53,7 +53,7 @@ $(document).ready(function(){
       if( data == holidays[i].date){
         console.log('sono nellif');
 
-        $(data).addClass('.red');
+        $(this).addClass('red');
 
       }
       });
