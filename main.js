@@ -5,18 +5,14 @@ $(document).ready(function(){
 
   var source   = $("#template").html();
   var template = Handlebars.compile(source);
-  // var gennaio = moment('2018-01-01').format('dddd, DD-MM');
   var num = moment('2018-01-01').daysInMonth();
 
 
   for (var i = 1; i <= num; i++) {
 
-// .format('dddd, DD MMMM')
-    var jan = moment([2018, 0, 1]).day(i).format('YYYY-MM-DD');
-    console.log(jan);
-    // $('#template li').clone();
-    // $('#template li').text().append();
 
+    var jan = moment([2018, 0, 1]).day(i).format('dddd, DD MMMM');
+    //console.log(jan);
     var context = {giorno: jan};
     var html    = template(context);
 
@@ -24,17 +20,8 @@ $(document).ready(function(){
     $('.lista').append(html);
 
 
-
-
-
-
-
-
-
   }
  // faccio la chiamata ajax
-
-
 
 
   $.ajax({
@@ -45,26 +32,27 @@ $(document).ready(function(){
       for (var i = 0; i < holidays.length; i++) {
       $('li').each(function(){
 
-
+        var newholiday = moment(holidays[i].date).format('dddd, DD MMMM');
 
         var data = $(this).html();
-        // console.log(holidays[i]);
+        // sconsole.log(holidays[i]);
 
-      if( data == holidays[i].date){
+      if( data == newholiday){
         console.log('sono nellif');
 
         $(this).addClass('red');
 
       }
+
       });
+
       }
-      // else {
-      //   $('.lista').append(html);
-      // }
+
     },
     error : function(){
-
+      
     }
+
 
   });
 
