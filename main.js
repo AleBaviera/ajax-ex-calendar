@@ -12,6 +12,7 @@ $(document).ready(function(){
   // while ( i <= 8) {
     $('.next').click( function(){
       var attribute = $('.title').attr('data-month');
+      var attrPag = $('.calendar').attr('data-month');
       // var numattr =  parseInt(attribute);
       // console.log('numattr',numattr);
       //
@@ -20,6 +21,13 @@ $(document).ready(function(){
 
       var numattr = parseInt(attribute)+1;
       var newmonth= String(numattr);
+
+      $('.calendar').html('');
+      // var numattrPag = parseInt(attrPag)+1;
+      // var newPag= String(numattrPag);
+      //
+      // $('.calendar div').attr('data-month',newPag);
+
         // meseincorso = '0' + String(i);
         // console.log(meseincorso);
         // database = moment('2018-'+ meseincorso + '-01');
@@ -41,6 +49,7 @@ $(document).ready(function(){
     var num = database.daysInMonth();
     var data_month = database.format('MM');
 
+
     // console.log(data_month);
     // if(data_month < 10){
     //   data_month += '0' + String(data_month);
@@ -54,7 +63,7 @@ $(document).ready(function(){
 
       var pagmese = moment([anno, mese, i]).format('dddd, DD');
       //console.log(pagmese);
-      var context = {giorno: pagmese, data_month: data_month};
+      var context = {giorno: pagmese , data_month: data_month};//,
       var html    = template(context);
 
 
