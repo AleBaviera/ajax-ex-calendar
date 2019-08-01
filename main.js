@@ -48,7 +48,8 @@ $(document).ready(function(){
         $('.happy').html('');
         $('.end').html('');
         $('.calendar').html('');
-        showMonth('2018-12-01');
+        showMonth('2018-01-01');
+
         // attribute = $('.title').attr('data-month','12');
         // $('.end').html('fine calendario');
         // $('.calendar').html('');
