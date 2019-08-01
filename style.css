@@ -21,3 +21,18 @@
   color: lightgray;
   font-size: 50px;
 }
+.slide{
+  color: lightgray;
+  font-size: 20px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+
+}
+
+.slide span{
+  margin: 5px;
+}
+.slide span i{
+  margin: 5px;
+}
