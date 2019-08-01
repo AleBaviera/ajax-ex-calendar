@@ -8,37 +8,41 @@ $(document).ready(function(){
 
   showMounth('2018-01-01');
 
-  // var i = 1;
-  // while ( i <= 8) {
     $('.next').click( function(){
       var attribute = $('.title').attr('data-month');
-      var attrPag = $('.calendar').attr('data-month');
-      // var numattr =  parseInt(attribute);
-      // console.log('numattr',numattr);
-      //
-      // var nextmonth = moment([2018,numattr,01]).add(1, 'Month');
-      // console.log(nextmonth);
-
       var numattr = parseInt(attribute)+1;
       var newmonth= String(numattr);
-
-      $('.calendar').html('');
-      // var numattrPag = parseInt(attrPag)+1;
-      // var newPag= String(numattrPag);
-      //
-      // $('.calendar div').attr('data-month',newPag);
-
-        // meseincorso = '0' + String(i);
-        // console.log(meseincorso);
-        // database = moment('2018-'+ meseincorso + '-01');
-        // console.log(database);
+      if(numattr == 12){
+        $('.end').html('fine calendario');
+        $('.calendar').html('');
         showMounth('2018-'+ newmonth + '-01');
+      }else{
+        $('.end').html('');
+        $('.calendar').html('');
+        showMounth('2018-'+ newmonth + '-01');
+      }
 
 
     });
-  // i++;
-  // }
 
+    $('.prev').click( function(){
+      var attribute = $('.title').attr('data-month');
+      var attrPag = $('.calendar').attr('data-month');
+
+      var numattr = parseInt(attribute)- 1;
+      var newmonth= String(numattr);
+
+      if(numattr == 00){
+        $('.end').html('inizio calendario');
+        showMounth('2018-01-01');
+
+      }else{
+      $('.end').html('');
+      $('.calendar').html('');
+      showMounth('2018-'+ newmonth + '-01');
+      }
+
+    });
 
  function showMounth(stringaargomento){
 
