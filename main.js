@@ -6,20 +6,27 @@ $(document).ready(function(){
   var source   = $("#template").html();
   var template = Handlebars.compile(source);
 
-  showMounth('2018-01-01');
+  showMonth('2018-01-01');
 
     $('.next').click( function(){
       var attribute = $('.title').attr('data-month');
       var numattr = parseInt(attribute)+1;
       var newmonth= String(numattr);
-      if(numattr == 12){
-        $('.end').html('fine calendario');
-        $('.calendar').html('');
-        showMounth('2018-'+ newmonth + '-01');
+      if(numattr > 12){
+
+        showHappy();
+
+        // attribute = $('.title').attr('data-month','12');
+        // $('.end').html('fine calendario');
+        // $('.calendar').html('');
+        // showMonth('2018-12-01');
+        // showMonth('2018-'+ newmonth + '-01');
+        // newmonth = '12';
       }else{
+        $('.happy').html('');
         $('.end').html('');
         $('.calendar').html('');
-        showMounth('2018-'+ newmonth + '-01');
+        showMonth('2018-'+ newmonth + '-01');
       }
 
 
@@ -34,17 +41,33 @@ $(document).ready(function(){
 
       if(numattr == 00){
         $('.end').html('inizio calendario');
-        showMounth('2018-01-01');
+        showMonth('2018-01-01');
 
-      }else{
+      }
+      else if(showHappy){
+        $('.happy').html('');
+        $('.end').html('');
+        $('.calendar').html('');
+        showMonth('2018-12-01');
+        // attribute = $('.title').attr('data-month','12');
+        // $('.end').html('fine calendario');
+        // $('.calendar').html('');
+        // showMonth('2018-12-01');
+        // showMonth('2018-'+ newmonth + '-01');
+        // newmonth = '12';
+      }
+
+
+      else{
+      $('.happy').html('');
       $('.end').html('');
       $('.calendar').html('');
-      showMounth('2018-'+ newmonth + '-01');
+      showMonth('2018-'+ newmonth + '-01');
       }
 
     });
 
- function showMounth(stringaargomento){
+ function showMonth(stringaargomento){
 
     var database = moment(stringaargomento);
     var mesetitle = database.format('MMMM');
@@ -53,13 +76,12 @@ $(document).ready(function(){
     var num = database.daysInMonth();
     var data_month = database.format('MM');
 
-
-    // console.log(data_month);
-    // if(data_month < 10){
-    //   data_month += '0' + String(data_month);
-    //
-    //
-    // }
+    if (data_month == '12'){
+      // data_month = '12';
+      // $('.title').attr('data-month', data_month);
+      // $('.calendar').attr('data-month', data_month);
+      database = moment('2018-12-01');
+    }
 
 
     for (var i = 1; i <= num; i++) {
@@ -113,6 +135,12 @@ $(document).ready(function(){
     });
   }
 
+  function showHappy(){
+    $('.happy').text('happy new year!!!!!!!');
+    $('.end').html('');
+    $('.calendar').html('');
+    $('.title').html('');
 
+  }
 
 });
