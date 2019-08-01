@@ -11,16 +11,18 @@ $(document).ready(function(){
   for (var i = 1; i <= num; i++) {
 
 
-    var jan = moment([2018, 0, 1]).day(i).format('dddd, DD MMMM');
+    var jan = moment([2018, 0, 1]).day(i).format('dddd, DD');
     //console.log(jan);
     var context = {giorno: jan};
     var html    = template(context);
 
 
-    $('.lista').append(html);
+    $('.calendar').append(html);
 
 
   }
+  var mese = moment('2018-01').format('MMMM YYYY');
+  $('.title').append(mese);
  // faccio la chiamata ajax
 
 
@@ -30,19 +32,19 @@ $(document).ready(function(){
     success : function(data){
       var holidays = data.response;
       for (var i = 0; i < holidays.length; i++) {
-      $('li').each(function(){
+      $('.day').each(function(){
 
-        var newholiday = moment(holidays[i].date).format('dddd, DD MMMM');
+        var newholiday = moment(holidays[i].date).format('dddd, DD');
 
         var data = $(this).html();
-        // sconsole.log(holidays[i]);
+        // console.log(holidays[i]);
 
-      if( data == newholiday){
-        console.log('sono nellif');
+        if( data == newholiday){
+          // console.log('sono nellif');
 
-        $(this).addClass('red');
+          $(this).addClass('red');
 
-      }
+        }
 
       });
 
@@ -50,7 +52,7 @@ $(document).ready(function(){
 
     },
     error : function(){
-      
+
     }
 
 
