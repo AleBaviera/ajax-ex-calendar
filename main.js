@@ -1,17 +1,23 @@
 
 $(document).ready(function(){
-  var feste = 'https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0';
+  var feste = 'https://flynn.boolean.careers/exercises/api/holidays';
 
 
   var source   = $("#template").html();
   var template = Handlebars.compile(source);
-  var num = moment('2018-01-01').daysInMonth();
+
+
+  var database = moment('2018-03-01')
+  var mesetitle = database.format('MMMM')
+  var mese = parseInt(database.format('M'))-1;
+  var anno = database.format('YYYY')
+  var num = database.daysInMonth();
 
 
   for (var i = 1; i <= num; i++) {
 
 
-    var jan = moment([2018, 0, 1]).day(i).format('dddd, DD');
+    var jan = moment([anno, mese, i]).format('dddd, DD');
     //console.log(jan);
     var context = {giorno: jan};
     var html    = template(context);
@@ -21,13 +27,13 @@ $(document).ready(function(){
 
 
   }
-  var mese = moment('2018-01').format('MMMM YYYY');
-  $('.title').append(mese);
+  $('.title').text(mesetitle + ' ' + anno);
  // faccio la chiamata ajax
 
 
   $.ajax({
     url : feste,
+    data :{year : '2018', month : mese},
     method : 'GET',
     success : function(data){
       var holidays = data.response;
@@ -41,7 +47,7 @@ $(document).ready(function(){
 
         if( data == newholiday){
           // console.log('sono nellif');
-
+          $(this).append(' ' + holidays[i].name);
           $(this).addClass('red');
 
         }
