@@ -6,22 +6,30 @@ $(document).ready(function(){
   var source   = $("#template").html();
   var template = Handlebars.compile(source);
 
+  showMounth('2018-01-01');
 
-
-
-  var i = 1;
-  while ( i <= 8) {
+  // var i = 1;
+  // while ( i <= 8) {
     $('.next').click( function(){
+      var attribute = $('.title').attr('data-month');
+      // var numattr =  parseInt(attribute);
+      // console.log('numattr',numattr);
+      //
+      // var nextmonth = moment([2018,numattr,01]).add(1, 'Month');
+      // console.log(nextmonth);
 
-        meseincorso = '0' + String(i);
-        console.log(meseincorso);
-        database = moment('2018-'+ meseincorso + '-01');
-        console.log(database);
-        showMounth('2018-'+ meseincorso + '-01');
+      var numattr = parseInt(attribute)+1;
+      var newmonth= String(numattr);
+        // meseincorso = '0' + String(i);
+        // console.log(meseincorso);
+        // database = moment('2018-'+ meseincorso + '-01');
+        // console.log(database);
+        showMounth('2018-'+ newmonth + '-01');
+
 
     });
-  i++;
-  }
+  // i++;
+  // }
 
 
  function showMounth(stringaargomento){
@@ -31,6 +39,14 @@ $(document).ready(function(){
     var mese = parseInt(database.format('M'))-1;
     var anno = database.format('YYYY');
     var num = database.daysInMonth();
+    var data_month = database.format('MM');
+
+    // console.log(data_month);
+    // if(data_month < 10){
+    //   data_month += '0' + String(data_month);
+    //
+    //
+    // }
 
 
     for (var i = 1; i <= num; i++) {
@@ -38,7 +54,7 @@ $(document).ready(function(){
 
       var pagmese = moment([anno, mese, i]).format('dddd, DD');
       //console.log(pagmese);
-      var context = {giorno: pagmese};
+      var context = {giorno: pagmese, data_month: data_month};
       var html    = template(context);
 
 
@@ -46,7 +62,7 @@ $(document).ready(function(){
 
 
     }
-    $('.title').text(mesetitle + ' ' + anno);
+    $('.title').text(mesetitle + ' ' + anno).attr('data-month', data_month);
    // faccio la chiamata ajax
 
 
