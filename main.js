@@ -8,65 +8,53 @@ $(document).ready(function(){
 
   showMonth('2018-01-01');
 
-    $('.next').click( function(){
-      var attribute = $('.title').attr('data-month');
-      var numattr = parseInt(attribute)+1;
-      var newmonth= String(numattr);
-      if(numattr > 12){
+  $('.next').click( function(){
+    var attribute = $('.title').attr('data-month');
+    var numattr = parseInt(attribute)+1;
+    var newmonth= String(numattr);
 
-        showHappy();
-
-        // attribute = $('.title').attr('data-month','12');
-        // $('.end').html('fine calendario');
-        // $('.calendar').html('');
-        // showMonth('2018-12-01');
-        // showMonth('2018-'+ newmonth + '-01');
-        // newmonth = '12';
-      }else{
-        $('.happy').html('');
-        $('.end').html('');
-        $('.calendar').html('');
-        showMonth('2018-'+ newmonth + '-01');
-      }
-
-
-    });
-
-    $('.prev').click( function(){
-      var attribute = $('.title').attr('data-month');
-      var attrPag = $('.calendar').attr('data-month');
-
-      var numattr = parseInt(attribute)- 1;
-      var newmonth= String(numattr);
-
-      if(numattr == 00){
-        $('.end').html('inizio calendario');
-        showMonth('2018-01-01');
-
-      }
-      else if(showHappy){
-        $('.happy').html('');
-        $('.end').html('');
-        $('.calendar').html('');
-        showMonth('2018-01-01');
-
-        // attribute = $('.title').attr('data-month','12');
-        // $('.end').html('fine calendario');
-        // $('.calendar').html('');
-        // showMonth('2018-12-01');
-        // showMonth('2018-'+ newmonth + '-01');
-        // newmonth = '12';
-      }
-
-
-      else{
+    if(numattr > 12){
+      showHappy();
+    }else{
       $('.happy').html('');
       $('.end').html('');
       $('.calendar').html('');
       showMonth('2018-'+ newmonth + '-01');
-      }
+    }
 
-    });
+
+  });
+
+  $('.prev').click( function(){
+    var attribute = $('.title').attr('data-month');
+    var numattr = parseInt(attribute)- 1;
+    var newmonth= String(numattr);
+
+    if(numattr == 00){
+      $('.end').html('inizio calendario');
+      showMonth('2018-01-01');
+    }
+    else if(showHappy){
+      $('.happy').html('');
+      $('.end').html('');
+      $('.calendar').html('');
+      showMonth('2018-01-01');
+
+      // attribute = $('.title').attr('data-month','12');
+      // $('.end').html('fine calendario');
+      // $('.calendar').html('');
+      // showMonth('2018-12-01');
+      // showMonth('2018-'+ newmonth + '-01');
+      // newmonth = '12';
+    }
+    else{
+      $('.happy').html('');
+      $('.end').html('');
+      $('.calendar').html('');
+      showMonth('2018-'+ newmonth + '-01');
+    }
+
+  });
 
  function showMonth(stringaargomento){
 
@@ -77,12 +65,12 @@ $(document).ready(function(){
     var num = database.daysInMonth();
     var data_month = database.format('MM');
 
-    if (data_month == '12'){
-      // data_month = '12';
-      // $('.title').attr('data-month', data_month);
-      // $('.calendar').attr('data-month', data_month);
-      database = moment('2018-12-01');
-    }
+    // if (data_month == '12'){
+    //   // data_month = '12';
+    //   // $('.title').attr('data-month', data_month);
+    //   // $('.calendar').attr('data-month', data_month);
+    //   database = moment('2018-12-01');
+    // }
 
 
     for (var i = 1; i <= num; i++) {
@@ -109,30 +97,24 @@ $(document).ready(function(){
       success : function(data){
         var holidays = data.response;
         for (var i = 0; i < holidays.length; i++) {
-        $('.day').each(function(){
+          $('.day').each(function(){
 
-          var newholiday = moment(holidays[i].date).format('dddd, DD');
+            var newholiday = moment(holidays[i].date).format('dddd, DD');
+            var data = $(this).html();
+            // console.log(holidays[i]);
 
-          var data = $(this).html();
-          // console.log(holidays[i]);
+            if( data == newholiday){
+              // console.log('sono nellif');
+              $(this).append(' ' + holidays[i].name);
+              $(this).addClass('red');
 
-          if( data == newholiday){
-            // console.log('sono nellif');
-            $(this).append(' ' + holidays[i].name);
-            $(this).addClass('red');
-
-          }
-
-        });
-
+            }
+          });
         }
-
       },
       error : function(){
 
       }
-
-
     });
   }
 
